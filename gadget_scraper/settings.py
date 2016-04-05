@@ -42,7 +42,7 @@ HTTP_PROXY = 'http://127.0.0.1:9050'
 
 DOWNLOADER_MIDDLEWARES = {
 	 'gadget_scraper.middlewares.RandomUserAgentMiddleware': 400,
-	# 'gadget_scraper.middlewares.ProxyMiddleware': 410,
+	 'gadget_scraper.middlewares.ProxyMiddleware': 410,
 	 'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None
 	# Disable compression middleware, so the actual HTML pages are cached
 }
