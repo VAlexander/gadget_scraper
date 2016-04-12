@@ -189,7 +189,11 @@ class CompareMyMobilePhonesSpider(Spider):
 				## Create new item and set data for it
 				item = GadgetScraperItem()
 				item["make"] = "Samsung"
-				item["model"] = "{0} {1}".format(model, submodel)
+				
+				if model != submodel:
+					item["model"] = "{0} {1}".format(model, submodel)
+				else:
+					item["model"] = "{0}".format(model)
 				
 				## Prepare data for HTML request
 				url = button.xpath("./@href").extract()[0]
