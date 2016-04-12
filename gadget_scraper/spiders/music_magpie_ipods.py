@@ -5,9 +5,9 @@ import json
 from scrapy import Spider, Request, FormRequest
 
 try:
-    from items import GadgetScraperItem
+    from items import MusicMagpieItem
 except ImportError:
-    from gadget_scraper.items import CompareMyMobileItem
+    from gadget_scraper.items import MusicMagpieItem
 
 
 class MusicMagpieIpodsSpider(Spider):
@@ -40,7 +40,7 @@ class MusicMagpieIpodsSpider(Spider):
 
         # And creating item and request for each iPod entry
         for ipod_entry in json_response["d"]:
-            item = CompareMyMobileItem()
+            item = MusicMagpieItem()
             model = ipod_entry["name"].strip()
 
             item["make"] = response.meta["make"]
@@ -80,20 +80,47 @@ class MusicMagpieIpodsSpider(Spider):
                 "ctl00$ctl00$ctl00$ContentPlaceHolderDefault$mainContent$itemCondition_11$ddlCondition": "6",
             },
             dont_filter=True,
-            meta={"item": item},
+            meta={"item": item, "ipod_code": ipod_code},
             cookies={"musicMagpieVal": "loggedIn=0&barcode={0}&condition=6".format(ipod_code)},
-            callback=self.get_broken_price,
+            callback=self.get_poor_price,
         )
 
         yield request
 
-    def get_broken_price(self, response):
+    def get_poor_price(self, response):
         # Removing null byte
         body = response.body.replace("\x00", "")
         response = response.replace(body=body)
 
         # And parsing price
         item = response.meta["item"]
-        item["broken_price_1"] = response.xpath("//span[@class='blue strong']/text()").extract()[0]
+        item["poor_condition_price_1"] = response.xpath("//span[@class='blue strong']/text()").extract()[0]
+
+        ipod_code = response.meta["ipod_code"]
+
+        # And creating POST request with new cookie
+        # To get faulty piece price
+        request = FormRequest(
+            url="http://www.musicmagpie.co.uk/start-selling/basket-condition",
+            formdata={
+                "__EVENTTARGET": "ctl00$ctl00$ctl00$ContentPlaceHolderDefault$mainContent$itemCondition_11$ddlCondition",
+                "ctl00$ctl00$ctl00$ContentPlaceHolderDefault$mainContent$itemCondition_11$ddlCondition": "7",
+            },
+            dont_filter=True,
+            meta={"item": item, "ipod_code": ipod_code},
+            cookies={"musicMagpieVal": "loggedIn=0&barcode={0}&condition=7".format(ipod_code)},
+            callback=self.get_faulty_price,
+        )
+
+        yield request
+
+    def get_faulty_price(self, response):
+        # Removing null byte
+        body = response.body.replace("\x00", "")
+        response = response.replace(body=body)
+
+        # And parsing price
+        item = response.meta["item"]
+        item["faulty_price_1"] = response.xpath("//span[@class='blue strong']/text()").extract()[0]
 
         yield item
