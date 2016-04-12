@@ -6,7 +6,7 @@ from scrapy.selector import Selector
 try:
     from items import GadgetScraperItem
 except ImportError:
-    from gadget_scraper.items import GadgetScraperItem
+    from gadget_scraper.items import CompareMyMobileItem
 
 
 class CompareMyMobileHandheldConsolesSpider(Spider):
@@ -51,7 +51,7 @@ class CompareMyMobileHandheldConsolesSpider(Spider):
             model = console_div.xpath("(.//a)[2]/text()").extract()[0]
 
             ## Create new item
-            item = GadgetScraperItem()
+            item = CompareMyMobileItem()
             item["make"] = make
             item["model"] = model.strip()
 
@@ -80,7 +80,7 @@ class CompareMyMobileHandheldConsolesSpider(Spider):
                     option = option.replace("prices", "").strip()
 
                     ## Create new item and set data for it
-                    item = GadgetScraperItem()
+                    item = CompareMyMobileItem()
                     item["make"] = response.meta["make"]
                     item["model"] = "{0} {1}".format(model, option)
 

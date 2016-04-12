@@ -5,7 +5,7 @@ from scrapy.selector import Selector
 try:
     from items import GadgetScraperItem
 except ImportError:
-    from gadget_scraper.items import GadgetScraperItem
+    from gadget_scraper.items import CompareMyMobileItem
 import json
 
 
@@ -195,7 +195,7 @@ class CompareMyMobileTabletsSpider(Spider):
             model = tablet_div.xpath("(.//a)[2]/text()").extract()[0]
 
             ## Create new item
-            item = GadgetScraperItem()
+            item = CompareMyMobileItem()
             item["make"] = make
             item["model"] = model.strip()
 
@@ -342,7 +342,7 @@ class CompareMyMobileTabletsSpider(Spider):
     def get_ipad_connectivity(self, response):
         j = json.loads(response.body)
         for i in j["items"]:
-            item = GadgetScraperItem()
+            item = CompareMyMobileItem()
             item["make"] = "Apple"
             item["model"] = "{0} {1} {2}".format(i["group1"], i["group2"], i["group3"])
 

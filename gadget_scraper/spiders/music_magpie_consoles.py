@@ -7,7 +7,7 @@ from scrapy import Spider, Request, FormRequest
 try:
     from items import GadgetScraperItem
 except ImportError:
-    from gadget_scraper.items import GadgetScraperItem
+    from gadget_scraper.items import CompareMyMobileItem
 
 
 class MusicMagpieConsolesSpider(Spider):
@@ -61,7 +61,7 @@ class MusicMagpieConsolesSpider(Spider):
 
         for console in json_response["d"]:
             # For each model creating item
-            item = GadgetScraperItem()
+            item = CompareMyMobileItem()
             item["make"] = response.meta["make"]
             item["model"] = console["name"]
 

@@ -7,7 +7,7 @@ from scrapy import Spider, Request, FormRequest
 try:
     from items import GadgetScraperItem
 except ImportError:
-    from gadget_scraper.items import GadgetScraperItem
+    from gadget_scraper.items import CompareMyMobileItem
 
 
 class MusicMagpieIpodsSpider(Spider):
@@ -40,7 +40,7 @@ class MusicMagpieIpodsSpider(Spider):
 
         # And creating item and request for each iPod entry
         for ipod_entry in json_response["d"]:
-            item = GadgetScraperItem()
+            item = CompareMyMobileItem()
             model = ipod_entry["name"].strip()
 
             item["make"] = response.meta["make"]
