@@ -73,7 +73,7 @@ class GadgetScraperPipeline(object):
 				if not item[field][0].isdigit():
 					item[field] = item[field][1:]
 			except KeyError:
-				pass
+				item[field] = "0"
 			except IndexError:
 				pass
 				
