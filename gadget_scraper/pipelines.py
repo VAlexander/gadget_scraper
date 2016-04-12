@@ -70,8 +70,10 @@ class GadgetScraperPipeline(object):
 		
 		for field in price_fields:
 			try:
+				# If we got pound symbol
 				if not item[field][0].isdigit():
-					item[field] = item[field][1:]
+					# Remove it and strip the data
+					item[field] = item[field][1:].strip()
 			except KeyError:
 				item[field] = "0"
 			except IndexError:
