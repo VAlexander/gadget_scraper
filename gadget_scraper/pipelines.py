@@ -80,6 +80,7 @@ class GadgetScraperPipeline(object):
 				pass
 				
 		return item
+
 	
 	## When spider closed, finish exporting and close the file
 	## After that, mail the result
