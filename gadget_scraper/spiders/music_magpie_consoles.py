@@ -34,7 +34,7 @@ class MusicMagpieConsolesSpider(Spider):
         return (request,)
 
     def parse_consoles_makes(self, response):
-        #Parsing JSON response with makes
+        # Parsing JSON response with makes
         json_response = json.loads(response.body)
 
         for make in json_response["d"]:
@@ -56,7 +56,7 @@ class MusicMagpieConsolesSpider(Spider):
             yield request
 
     def parse_consoles_models(self, response):
-        #Parsing JSON respones with models
+        # Parsing JSON respones with models
         json_response = json.loads(response.body)
 
         for console in json_response["d"]:
