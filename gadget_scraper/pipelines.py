@@ -25,22 +25,32 @@ class GadgetScraperPipeline(object):
         file = open('{0}.csv'.format(spider.name), 'w+b')
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
-        self.exporter.fields_to_export = [
-            "make",
-            "model",
-            "working_price_1",
-            "working_price_2",
-            "working_price_3",
-            "working_price_4",
-            "working_price_5",
-            "working_price_6",
-            "broken_price_1",
-            "broken_price_2",
-            "broken_price_3",
-            "broken_price_4",
-            "broken_price_5",
-            "broken_price_6",
-        ]
+
+        if "compare_my_mobile" in spider.name:
+            self.exporter.fields_to_export = [
+                "make",
+                "model",
+                "working_price_1",
+                "working_price_2",
+                "working_price_3",
+                "working_price_4",
+                "working_price_5",
+                "working_price_6",
+                "broken_price_1",
+                "broken_price_2",
+                "broken_price_3",
+                "broken_price_4",
+                "broken_price_5",
+                "broken_price_6",
+            ]
+        elif "music_magpie" in spider.name:
+            self.exporter.fields_to_export = [
+                "make",
+                "model",
+                "working_price_1",
+                "poor_condition_price_1",
+                "faulty_price_1",
+            ]
         self.exporter.encoding = "utf-8"
         self.exporter.start_exporting()
 
@@ -52,31 +62,17 @@ class GadgetScraperPipeline(object):
 
     # Removing trailing English pound symbol
     def remove_pound_symbol(self, item):
-        price_fields = [
-            "working_price_1",
-            "working_price_2",
-            "working_price_3",
-            "working_price_4",
-            "working_price_5",
-            "working_price_6",
-            "broken_price_1",
-            "broken_price_2",
-            "broken_price_3",
-            "broken_price_4",
-            "broken_price_5",
-            "broken_price_6"
-        ]
-
-        for field in price_fields:
-            try:
-                # If we got pound symbol
-                if not item[field][0].isdigit():
-                    # Remove it and strip the data
-                    item[field] = item[field][1:].strip()
-            except KeyError:
-                item[field] = "0"
-            except IndexError:
-                pass
+        for field in item.keys():
+            if "price" in field:
+                try:
+                    # If we got pound symbol
+                    if not item[field][0].isdigit():
+                        # Remove it and strip the data
+                        item[field] = item[field][1:].strip()
+                except KeyError:
+                    item[field] = "0"
+                except IndexError:
+                    pass
 
         return item
 
