@@ -30,141 +30,141 @@ class CompareMyMobileTabletsSpider(Spider):
         ## Making requests
         requests = []
 
-        # ## Apple, complicated chain of functions
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/ipad",
-        # meta={"make": "Apple"},
-        # callback=self.get_ipad_type,
-        # )
-        # )
+        ## Apple, complicated chain of functions
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/ipad",
+        meta={"make": "Apple"},
+        callback=self.get_ipad_type,
+        )
+        )
 
-        # ## Kindle, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/kindle",
-        # meta={"make": "Amazon"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Kindle, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/kindle",
+        meta={"make": "Amazon"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Acer, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/acer.html",
-        # meta={"make": "Acer"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Acer, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/acer.html",
+        meta={"make": "Acer"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Advent, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/advent.html",
-        # meta={"make": "Advent"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Advent, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/advent.html",
+        meta={"make": "Advent"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Alcatel, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/alcatel.html",
-        # meta={"make": "Alcatel"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Alcatel, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/alcatel.html",
+        meta={"make": "Alcatel"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Asus, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/asus.html",
-        # meta={"make": "Asus"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Asus, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/asus.html",
+        meta={"make": "Asus"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## BlackBerry, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/blackberry-playbook",
-        # meta={"make": "BlackBerry"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## BlackBerry, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/blackberry-playbook",
+        meta={"make": "BlackBerry"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Dell, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/dell.html",
-        # meta={"make": "Dell"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Dell, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/dell.html",
+        meta={"make": "Dell"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## ExoPC, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/exopc.html",
-        # meta={"make": "ExoPC"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## ExoPC, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/exopc.html",
+        meta={"make": "ExoPC"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Google, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/google.html",
-        # meta={"make": "Google"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Google, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/google.html",
+        meta={"make": "Google"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## HTC, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/htc.html",
-        # meta={"make": "HTC"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## HTC, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/htc.html",
+        meta={"make": "HTC"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Huawei, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/huawei.html",
-        # meta={"make": "Huawei"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Huawei, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/huawei.html",
+        meta={"make": "Huawei"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## LG, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/lg.html",
-        # meta={"make": "LG"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## LG, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/lg.html",
+        meta={"make": "LG"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Microsoft, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/microsoft-surface-tablets",
-        # meta={"make": "Microsoft"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Microsoft, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/microsoft-surface-tablets",
+        meta={"make": "Microsoft"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Motorola, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/motorola-xoom-tablets",
-        # meta={"make": "Motorola"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Motorola, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/motorola-xoom-tablets",
+        meta={"make": "Motorola"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Nokia, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/sell/nokia-lumia-tablets",
-        # meta={"make": "Nokia"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Nokia, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/sell/nokia-lumia-tablets",
+        meta={"make": "Nokia"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
-        # ## Samsung, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/samsung.html",
-        # meta={"make": "Samsung"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Samsung, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/samsung.html",
+        meta={"make": "Samsung"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
         ## Galaxy Tab, separate request
         requests.append(Request(
@@ -174,13 +174,13 @@ class CompareMyMobileTabletsSpider(Spider):
         )
         )
 
-        # ## Sony, every product is on page
-        # requests.append(Request(
-        # url="http://www.comparemymobile.com/recycle/tablets/sony.html",
-        # meta={"make": "Sony"},
-        # callback=self.parse_tablets_page,
-        # )
-        # )
+        ## Sony, every product is on page
+        requests.append(Request(
+        url="http://www.comparemymobile.com/recycle/tablets/sony.html",
+        meta={"make": "Sony"},
+        callback=self.parse_tablets_page,
+        )
+        )
 
         ## And returning them as initial
         return requests
