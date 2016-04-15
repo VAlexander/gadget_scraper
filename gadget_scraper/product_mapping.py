@@ -150,15 +150,3 @@ def start_mapping(input_filename, mapping_filename, output_filename, new_items_f
     map_items()
     write_mapped_items_to_csv(output_filename)
     write_new_items_to_csv(new_items_filename)
-
-
-if __name__ == '__main__':
-    start_mapping('compare_my_mobile_phones.csv',
-                  'mapping_details/mapping_details_mobile.csv',
-                  'mapping_result/ciyg_mobile_upload.csv',
-                  'mapping_result/ciyg_new_mobile.csv')
-
-    start_mapping('compare_my_mobile_tablets.csv',
-                  'mapping_details/mapping_details_tablet.csv',
-                  'mapping_result/ciyg_tablet_upload.csv',
-                  'mapping_result/ciyg_new_tablet.csv')
