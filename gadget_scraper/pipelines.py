@@ -2,10 +2,12 @@
 
 from datetime import datetime
 
+from scrapy import signals
 from scrapy.exporters import CsvItemExporter
 from scrapy.mail import MailSender
-from scrapy import signals
 from scrapy.utils.project import get_project_settings
+
+from product_mapping import start_mapping
 
 
 class GadgetScraperPipeline(object):
@@ -90,14 +92,40 @@ class GadgetScraperPipeline(object):
         settings = get_project_settings()
 
         mailer = MailSender.from_settings(settings)
-        filename = '{0}.csv'.format(spider.name)
+        scrape_results_filename = '{0}.csv'.format(spider.name)
+
+        attachs = list()
+        attachs.append((
+            scrape_results_filename,
+            'application/octet-stream',
+            open(scrape_results_filename, "rb"),
+        ))
+
+        if spider.name in settings["SPIDER_MAPPING"]:
+            mapping_details_filename = settings["SPIDER_MAPPING"][spider.name]
+            mapping_result_filename = 'mapping_result/ciyg_upload_{0}.csv'.format(spider.name)
+            mapping_new_filename = 'mapping_result/ciyg_new_{0}.csv'.format(spider.name)
+
+            start_mapping(scrape_results_filename,
+                          mapping_details_filename,
+                          mapping_result_filename,
+                          mapping_new_filename)
+
+            attachs.append((
+                mapping_result_filename,
+                'application/octet-stream',
+                open(mapping_result_filename, "rb"),
+            ))
+
+            attachs.append((
+                mapping_new_filename,
+                'application/octet-stream',
+                open(mapping_new_filename, "rb"),
+            ))
+
         mailer.send(
             to=settings["MAIL_TO"],
             subject="Contents of scraping from {0} spider".format(spider.name),
             body="Contents of scraping from {0} spider\nDate of scrape: {1}".format(spider.name, datetime.now()),
-            attachs=[(
-                filename,
-                'application/octet-stream',
-                open(filename, "rb"),
-            )]
+            attachs=attachs
         )
