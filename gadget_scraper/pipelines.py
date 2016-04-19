@@ -24,7 +24,7 @@ class GadgetScraperPipeline(object):
 
     # When spider opened, prepare csv exporter
     def spider_opened(self, spider):
-        file = open('{0}.csv'.format(spider.name), 'w+b')
+        file = open('scraping_result/{0}.csv'.format(spider.name), 'w+b')
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
 
@@ -102,12 +102,14 @@ class GadgetScraperPipeline(object):
         ))
 
         if spider.name in settings["SPIDER_MAPPING"]:
-            mapping_details_filename = settings["SPIDER_MAPPING"][spider.name]
+            mapping_details_filename = settings["SPIDER_MAPPING"][spider.name][0]
+            zeroes_filename = settings["SPIDER_MAPPING"][spider.name][1]
             mapping_result_filename = 'mapping_result/ciyg_upload_{0}.csv'.format(spider.name)
             mapping_new_filename = 'mapping_result/ciyg_new_{0}.csv'.format(spider.name)
 
             start_mapping(scrape_results_filename,
                           mapping_details_filename,
+                          zeroes_filename,
                           mapping_result_filename,
                           mapping_new_filename)
 

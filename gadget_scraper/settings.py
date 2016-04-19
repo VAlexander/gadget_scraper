@@ -22,8 +22,8 @@ LOG_LEVEL = "DEBUG"
 BOT_NAME = 'gadget_scraper'
 
 SPIDER_MAPPING = {
-    'compare_my_mobile_phones': 'mapping_details/mapping_details_mobile.csv',
-    'compare_my_mobile_tablets': 'mapping_details/mapping_details_tablet.csv'
+    'compare_my_mobile_phones': ['mapping_details/mapping_details_mobile.csv', 'mapping_details/mapping_zeroes_mobile.csv'],
+    'compare_my_mobile_tablets': ['mapping_details/mapping_details_tablet.csv', 'mapping_details/mapping_zeroes_tablet.csv']
 }
 
 SPIDER_MODULES = ['gadget_scraper.spiders']
