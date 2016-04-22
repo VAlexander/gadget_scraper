@@ -7,7 +7,7 @@ from scrapy.exporters import CsvItemExporter
 from scrapy.mail import MailSender
 from scrapy.utils.project import get_project_settings
 
-from product_mapping import start_mapping
+from product_mapping import Mapper
 
 
 class GadgetScraperPipeline(object):
@@ -92,7 +92,7 @@ class GadgetScraperPipeline(object):
         settings = get_project_settings()
 
         mailer = MailSender.from_settings(settings)
-        scrape_results_filename = '{0}.csv'.format(spider.name)
+        scrape_results_filename = 'scraping_result/{0}.csv'.format(spider.name)
 
         attachs = list()
         attachs.append((
@@ -104,14 +104,18 @@ class GadgetScraperPipeline(object):
         if spider.name in settings["SPIDER_MAPPING"]:
             mapping_details_filename = settings["SPIDER_MAPPING"][spider.name][0]
             zeroes_filename = settings["SPIDER_MAPPING"][spider.name][1]
+            export_networks = settings["SPIDER_MAPPING"][spider.name][2]
             mapping_result_filename = 'mapping_result/ciyg_upload_{0}.csv'.format(spider.name)
             mapping_new_filename = 'mapping_result/ciyg_new_{0}.csv'.format(spider.name)
 
-            start_mapping(scrape_results_filename,
-                          mapping_details_filename,
-                          zeroes_filename,
-                          mapping_result_filename,
-                          mapping_new_filename)
+            m = Mapper(scrape_results_filename,
+                       mapping_details_filename,
+                       zeroes_filename,
+                       mapping_result_filename,
+                       mapping_new_filename,
+                       export_networks)
+
+            m.map_items()
 
             attachs.append((
                 mapping_result_filename,
