@@ -246,19 +246,12 @@ class Mapper():
             for input_item in self.input_items:
                 if input_item.id == 1:
                     if self.export_networks:
-                        writer.writerow(
-                            (
-                                input_item.id, input_item.product_name, input_item.manufacturer_name,
-                                input_item.base_value,
-                                input_item.non_working, input_item.working_poor_modifier, 0, input_item.EE,
-                                input_item.O2, input_item.ORANGE, input_item.OTHER, input_item.TESCO, input_item.THREE,
-                                input_item.TMOBILE, input_item.UNKNOWN, input_item.UNLOCKED, input_item.VODAFONE))
+                        writer.writerow(('', input_item.product_name, input_item.manufacturer_name, 0, 0, 0,
+                                         0, input_item.EE, input_item.O2, input_item.ORANGE, input_item.OTHER,
+                                         input_item.TESCO, input_item.THREE, input_item.TMOBILE, input_item.UNKNOWN,
+                                         input_item.UNLOCKED, input_item.VODAFONE))
                     else:
-                        writer.writerow(
-                            (
-                                input_item.id, input_item.product_name, input_item.manufacturer_name,
-                                input_item.base_value,
-                                input_item.non_working, input_item.working_poor_modifier, 0))
+                        writer.writerow(('', input_item.product_name, input_item.manufacturer_name, 0, 0, 0, 0))
 
     def write_zeroes_to_csv(self):
         with open(self.zeroes_filename, 'wb') as csvfile:
