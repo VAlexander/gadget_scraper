@@ -230,7 +230,8 @@ class Mapper():
                                 input_item.non_working, input_item.working_poor_modifier, 0))
 
     def write_new_items_to_csv(self):
-        """Writes any new items to csv with input filename"""
+        """Writes any new items to csv with input filename.
+        All the prices are set to 0, and IDs are empty"""
         with open(self.new_items_filename, 'wb') as csvfile:
             writer = csv.writer(csvfile)
 
@@ -254,6 +255,7 @@ class Mapper():
                         writer.writerow(('', input_item.product_name, input_item.manufacturer_name, 0, 0, 0, 0))
 
     def write_zeroes_to_csv(self):
+        """Dumps all IDs for items with zero price to csv file"""
         with open(self.zeroes_filename, 'wb') as csvfile:
             fieldnames = ['product_id', ]
 
@@ -265,6 +267,7 @@ class Mapper():
                 writer.writerow((zero_id,))
 
     def map_items(self):
+        """Main method of the class. It maps IDs and writes result to files"""
         self.map_ids()
         self.write_mapped_items_to_csv()
         self.write_new_items_to_csv()
