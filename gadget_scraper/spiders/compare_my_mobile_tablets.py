@@ -20,6 +20,10 @@ class CompareMyMobileTabletsSpider(Spider):
     allowed_domains = ["comparemymobile.com"]
     start_urls = ()
 
+    upload_filename = 'Tablet update.csv'
+    mapping_subject = 'Mapping for tablets'
+    mapping_body = "Mapping for tablets\nDate of mapping: {0}"
+
     tablet_div_xpath = "//div[@class='col-xs-6 col-sm-4 col-md-3 col-lg-2 text-center']"
     galaxy_tab_div_xpath = "//div[@class='col-xs-6 col-sm-4 col-md-3 col-lg-2']"
 

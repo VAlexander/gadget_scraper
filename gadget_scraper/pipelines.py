@@ -86,6 +86,7 @@ class GadgetScraperPipeline(object):
         file.close()
 
         self.mail_result(spider)
+        self.mail_new_upload(spider)
 
     # Mailing result with attachments
     def mail_result(self, spider):
@@ -118,12 +119,6 @@ class GadgetScraperPipeline(object):
             m.map_items()
 
             attachs.append((
-                mapping_result_filename,
-                'application/octet-stream',
-                open(mapping_result_filename, "rb"),
-            ))
-
-            attachs.append((
                 mapping_new_filename,
                 'application/octet-stream',
                 open(mapping_new_filename, "rb"),
@@ -135,3 +130,23 @@ class GadgetScraperPipeline(object):
             body="Contents of scraping from {0} spider\nDate of scrape: {1}".format(spider.name, datetime.now()),
             attachs=attachs
         )
+
+    def mail_new_upload(self, spider):
+        settings = get_project_settings()
+        if spider.name in settings["SPIDER_MAPPING"]:
+            mailer = MailSender.from_settings(settings)
+            mapping_result_filename = 'mapping_result/ciyg_upload_{0}.csv'.format(spider.name)
+
+            attachs = list()
+            attachs.append((
+                spider.upload_filename,
+                'application/octet-stream',
+                open(mapping_result_filename, "rb"),
+            ))
+
+            mailer.send(
+                to=settings["MAIL_TO"],
+                subject=spider.mapping_subject,
+                body=spider.mapping_body.format(datetime.now()),
+                attachs=attachs
+            )

@@ -16,6 +16,10 @@ class CompareMyMobilePhonesSpider(Spider):
     allowed_domains = ["comparemymobile.com"]
     start_urls = ()
 
+    upload_filename = 'Mobile update.csv'
+    mapping_subject = 'Mapping for phones'
+    mapping_body = "Mapping for phones\nDate of mapping: {0}"
+
     iphone_div_xpath = "//div[@class='col-xs-6 col-sm-3 col-md-2 col-lg-2']"
     iphone_model_div_xpath = "./div[@class='text-center h4']/text()"
 
