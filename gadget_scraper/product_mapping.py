@@ -70,6 +70,10 @@ class CIYGItem(object):
         elif average_base_value >= 20:
             self.base_value = average_base_value - (average_base_value * 0.07)
 
+        # Apple branded mobiles £50.00 and greater get a 10% reduction from the average scraped price
+        if average_base_value >= 50 and self.manufacturer_name == 'Apple' and 'iPhone' in self.product_name:
+            self.base_value = average_base_value - (average_base_value * 0.10)
+
         non_working_prices = [float(x) for x in input_list[8:] if x]
         try:
             average_non_working = sum(non_working_prices) / len(non_working_prices)
