@@ -66,9 +66,9 @@ class CIYGItem(object):
         # Average scraped products value £2.50 to £20.00 set 50% of the average price
         elif 2.5 <= average_base_value < 20:
             self.base_value = 0.5 * average_base_value
-        # Average scraped products value £20.00 upwards set at average price minus 5%
+        # Average scraped products value £20.00 upwards set at average price minus 7%
         elif average_base_value >= 20:
-            self.base_value = average_base_value - (average_base_value * 0.05)
+            self.base_value = average_base_value - (average_base_value * 0.07)
 
         non_working_prices = [float(x) for x in input_list[8:] if x]
         try:
@@ -79,9 +79,9 @@ class CIYGItem(object):
         # Average scraped products value falling below £5.00 do not offer on (0 non working modifier price)
         if average_non_working < 5:
             self.non_working = 0
-        # Average scraped products value £2.50 to £20.00 set 50% of the average price
+        # Average scraped products non-working value £5.00 and upwards set at average broken price minus 5%
         elif average_non_working >= 5:
-            self.non_working = average_non_working
+            self.non_working = average_non_working - (average_non_working * 0.05)
 
         # Average scraped products non working price is up to £5.00 do not offer on (maximum reduction resulting in 0 offer)
         if self.non_working < 5:
